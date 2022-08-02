@@ -20,7 +20,6 @@ It includes the following smart pointers and helper classes:
 
 | Helper class | Description |
 | ------------ | ----------- |
-| bad_weak_ptr | exception thrown when accessing an expired weak_ptr |
 | default_delete | default deleter used by smart pointers |
 | enable_shared_from_this | allows an object to create a shared_ptr referring to itself |
 | owner_less | provides mixed-type owner-based ordering of shared and weak pointers |
@@ -32,7 +31,6 @@ A list of the extra features and the removed ones are given below. Notes regardi
 * make_unique (added in C++14)
 * array type support for shared_ptr (added in C++17)
 * reinterpret_pointer_cast for shared_ptr (added in C++17)
-* operator<< for unique_ptr (added in C++20)
 
 ### Removed features
 

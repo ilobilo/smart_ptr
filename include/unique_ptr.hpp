@@ -522,17 +522,6 @@ template<typename T, typename D>
     swap(unique_ptr<T, D>& up1, unique_ptr<T, D>& up2)
     { up1.swap(up2); }
 
-/* added in C++20 */
-/// unique_ptr I/O
-
-template<class E, class T, class Y>
-    std::basic_ostream<E, T>&
-    operator<<(std::basic_ostream<E, T>& os, const unique_ptr<Y>& up)
-    {
-        os << up.get();
-        return os;
-    }
-
 } // namespace smart_ptr
 
 namespace std {

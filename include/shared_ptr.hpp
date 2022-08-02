@@ -6,12 +6,10 @@
 #include <cstddef>      /// nullptr_t, size_t, ptrdiff_t
 #include <utility>      /// move, forward, swap
 #include <functional>   /// less, hash
-#include <iostream>     /// basic_ostream
 #include <type_traits>  /// extent, remove_extent, is_array, is_void
                             /// common_type
 
 #include "control_block.hpp"
-#include "bad_weak_ptr.hpp"
 #include "weak_ptr.hpp"
 #include "unique_ptr.hpp"
 
@@ -66,7 +64,7 @@ public:
 
     /// Index operator, dereferencing operators are not provided
     element_type* 
-    operator[](std::ptrdiff_t i) const noexcept
+    operator[](ptrdiff_t i) const noexcept
     {
         assert(_get() != nullptr);
 	    static_assert(!std::extent<T>::value || i < std::extent<T>::value);
@@ -237,7 +235,7 @@ public:
       _control_block{wp._control_block}
     {
         if (wp.expired()) {
-            throw bad_weak_ptr{};
+            assert(!"Bad weak_ptr!");
         } else {
             _control_block->inc_ref();
         }
@@ -569,16 +567,6 @@ template<typename D, typename T>
     inline D*
     get_deleter(const shared_ptr<T>& sp) noexcept
     { return reinterpret_cast<D*>(sp._control_block->get_deleter()); }
-
-// 20.7.2.2.11, shared_ptr I/O
-
-template<class E, class T, class Y>
-    inline std::basic_ostream<E, T>&
-    operator<<(std::basic_ostream<E, T>& os, const shared_ptr<Y>& sp)
-    {
-        os << sp.get();
-        return os;
-    }
 
 } // namespace smart_ptr
 

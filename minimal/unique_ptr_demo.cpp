@@ -16,9 +16,18 @@
 
 struct D
 {
-    D() { std::cout << "D::D" << std::endl; }
-    ~D() { std::cout << "D::~D" << std::endl; }
-    void bar() { std::cout << "D::bar" << std::endl; }
+    D()
+    {
+        std::cout << "D::D" << std::endl;
+    }
+    ~D()
+    {
+        std::cout << "D::~D" << std::endl;
+    }
+    void bar()
+    {
+        std::cout << "D::bar" << std::endl;
+    }
 };
 
 int main()

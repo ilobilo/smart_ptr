@@ -8,47 +8,54 @@
 #ifndef DEFAULT_DELETE_HPP
 #define DEFAULT_DELETE_HPP 1
 
-namespace smart_ptr {
-
-// 20.7.1.1 Default deleters
-
-// 20.7.1.1.2, default_delete
-
-template <typename T>
-class default_delete
+namespace smart_ptr
 {
-public:
-    /// Default constructor
-    constexpr default_delete() noexcept = default;
 
-    /// Converting constructor, convertibility is not checked
-    template <typename U>
-    default_delete(const default_delete<U>&) noexcept
-    { }
+    // 20.7.1.1 Default deleters
 
-    /// Call operator
-    void operator()(T* p) const
-    { delete p; }
-};
+    // 20.7.1.1.2, default_delete
 
-// 20.7.1.1.3, default_delete<T[]>
+    template<typename T>
+    class default_delete
+    {
+    public:
+        /// Default constructor
+        constexpr default_delete() noexcept = default;
 
-template <typename T>
-class default_delete<T[]>
-{
-public:
-    /// Default constructor
-    constexpr default_delete() noexcept = default;
+        /// Converting constructor, convertibility is not checked
+        template<typename U>
+        default_delete(const default_delete<U> &) noexcept
+        {
+        }
 
-    /// Converting constructor, convertibility is not checked
-    template <typename U>
-    default_delete(const default_delete<U[]>&) noexcept
-    { }
+        /// Call operator
+        void operator()(T *p) const
+        {
+            delete p;
+        }
+    };
 
-    /// Call operator
-    void operator()(T* p) const
-    { delete[] p; }
-};
+    // 20.7.1.1.3, default_delete<T[]>
+
+    template<typename T>
+    class default_delete<T[]>
+    {
+    public:
+        /// Default constructor
+        constexpr default_delete() noexcept = default;
+
+        /// Converting constructor, convertibility is not checked
+        template<typename U>
+        default_delete(const default_delete<U[]> &) noexcept
+        {
+        }
+
+        /// Call operator
+        void operator()(T *p) const
+        {
+            delete[] p;
+        }
+    };
 
 } // namespace smart_ptr
 

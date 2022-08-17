@@ -20,54 +20,72 @@
 #include "shared_ptr.hpp"
 #include "weak_ptr.hpp"
 
-namespace smart_ptr {
+namespace smart_ptr
+{
 
-// Forward declarations
+    // Forward declarations
 
-template<typename T> class shared_ptr;
-template<typename T> class weak_ptr;
+    template<typename T>
+    class shared_ptr;
+    template<typename T>
+    class weak_ptr;
 
-// 20.7.2.3.7, Class template owner_less
+    // 20.7.2.3.7, Class template owner_less
 
-template<typename T> struct owner_less;
+    template<typename T>
+    struct owner_less;
 
-template<typename T>
-struct owner_less<shared_ptr<T>> {
-    using result_type = bool;
-    using first_argument_type = shared_ptr<T>;
-    using second_argument_type = shared_ptr<T>;
+    template<typename T>
+    struct owner_less<shared_ptr<T>>
+    {
+        using result_type = bool;
+        using first_argument_type = shared_ptr<T>;
+        using second_argument_type = shared_ptr<T>;
 
-    bool
-    operator()(const shared_ptr<T>& lhs, const shared_ptr<T>& rhs) const
-    { return lhs.owner_before(rhs); }
+        bool
+        operator()(const shared_ptr<T> &lhs, const shared_ptr<T> &rhs) const
+        {
+            return lhs.owner_before(rhs);
+        }
 
-    bool
-    operator()(const shared_ptr<T>& lhs, const weak_ptr<T>& rhs) const
-    { return lhs.owner_before(rhs); }
+        bool
+        operator()(const shared_ptr<T> &lhs, const weak_ptr<T> &rhs) const
+        {
+            return lhs.owner_before(rhs);
+        }
 
-    bool
-    operator()(const weak_ptr<T>& lhs, const shared_ptr<T>& rhs) const
-    { return lhs.owner_before(rhs); }
-};
+        bool
+        operator()(const weak_ptr<T> &lhs, const shared_ptr<T> &rhs) const
+        {
+            return lhs.owner_before(rhs);
+        }
+    };
 
-template<typename T>
-struct owner_less<weak_ptr<T>> {
-    using result_type = bool;
-    using first_argument_type = weak_ptr<T>;
-    using second_argument_type = weak_ptr<T>;
+    template<typename T>
+    struct owner_less<weak_ptr<T>>
+    {
+        using result_type = bool;
+        using first_argument_type = weak_ptr<T>;
+        using second_argument_type = weak_ptr<T>;
 
-    bool
-    operator()(const weak_ptr<T>& lhs, const weak_ptr<T>& rhs) const
-    { return lhs.owner_before(rhs); }
+        bool
+        operator()(const weak_ptr<T> &lhs, const weak_ptr<T> &rhs) const
+        {
+            return lhs.owner_before(rhs);
+        }
 
-    bool
-    operator()(const shared_ptr<T>& lhs, const weak_ptr<T>& rhs) const
-    { return lhs.owner_before(rhs); }
+        bool
+        operator()(const shared_ptr<T> &lhs, const weak_ptr<T> &rhs) const
+        {
+            return lhs.owner_before(rhs);
+        }
 
-    bool
-    operator()(const weak_ptr<T>& lhs, const shared_ptr<T>& rhs) const
-    { return lhs.owner_before(rhs); }
-};
+        bool
+        operator()(const weak_ptr<T> &lhs, const shared_ptr<T> &rhs) const
+        {
+            return lhs.owner_before(rhs);
+        }
+    };
 
 } // namespace smart_ptr
 

@@ -17,42 +17,58 @@
 #include "shared_ptr.hpp"
 #include "weak_ptr.hpp"
 
-namespace smart_ptr {
+namespace smart_ptr
+{
 
-// Forward declarations
+    // Forward declarations
 
-template<typename T> class shared_ptr;
-template<typename T> class weak_ptr;
+    template<typename T>
+    class shared_ptr;
+    template<typename T>
+    class weak_ptr;
 
-// 20.7.2.4 Class template enable_shared_from_this
+    // 20.7.2.4 Class template enable_shared_from_this
 
-template<typename T>
-class enable_shared_from_this {
-private:
-    weak_ptr<T> weak_this;
-protected:
-    constexpr enable_shared_from_this() noexcept
-    : weak_this{}
-    { }
-    
-    enable_shared_from_this(const enable_shared_from_this& r) noexcept
-    { }
-    
-    enable_shared_from_this&
-    operator=(const enable_shared_from_this&)
-    { return *this; }
-    
-    ~enable_shared_from_this()
-    { }
-public:
-    shared_ptr<T>
-    shared_from_this()
-    { return shared_ptr<T>(weak_this); }
+    template<typename T>
+    class enable_shared_from_this
+    {
+    private:
+        weak_ptr<T> weak_this;
 
-    shared_ptr<const T>
-    shared_from_this() const
-    { return shared_ptr<const T>(weak_this); }
-};
+    protected:
+        constexpr enable_shared_from_this() noexcept
+            :
+            weak_this{}
+        {
+        }
+
+        enable_shared_from_this(const enable_shared_from_this &r) noexcept
+        {
+        }
+
+        enable_shared_from_this &
+        operator=(const enable_shared_from_this &)
+        {
+            return *this;
+        }
+
+        ~enable_shared_from_this()
+        {
+        }
+
+    public:
+        shared_ptr<T>
+        shared_from_this()
+        {
+            return shared_ptr<T>(weak_this);
+        }
+
+        shared_ptr<const T>
+        shared_from_this() const
+        {
+            return shared_ptr<const T>(weak_this);
+        }
+    };
 
 } // namespace smart_ptr
 

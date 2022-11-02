@@ -42,7 +42,7 @@ namespace smart_ptr
         {
         }
 
-        enable_shared_from_this(const enable_shared_from_this &r) noexcept
+        enable_shared_from_this(const enable_shared_from_this &) noexcept
         {
         }
 
